@@ -1,6 +1,6 @@
 <?php
 
-namespace Ninjami\NovaSimpleCms;
+namespace Joonas1234\NovaSimpleCms;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;

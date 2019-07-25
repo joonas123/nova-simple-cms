@@ -1,8 +1,8 @@
 <?php
 
-namespace Ninjami\NovaSimpleCms\Http\Controllers;
+namespace Joonas1234\NovaSimpleCms\Http\Controllers;
 
-use Ninjami\NovaSimpleCms\Http\Resources\PageViewResource;
+use Joonas1234\NovaSimpleCms\Http\Resources\PageViewResource;
 
 class PublicPageController extends Controller
 {

@@ -1,5 +1,5 @@
 {
-    "name": "ninjami/nova-simple-cms",
+    "name": "joonas1234/nova-simple-cms",
     "description": "A Laravel Nova tool.",
     "keywords": [
         "laravel",
@@ -14,13 +14,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Ninjami\\NovaSimpleCms\\": "src/"
+            "Joonas1234\\NovaSimpleCms\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Ninjami\\NovaSimpleCms\\ToolServiceProvider"
+                "Joonas1234\\NovaSimpleCms\\ToolServiceProvider"
             ]
         }
     },

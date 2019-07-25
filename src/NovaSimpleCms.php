@@ -1,6 +1,6 @@
 <?php
 
-namespace Ninjami\NovaSimpleCms;
+namespace Joonas1234\NovaSimpleCms;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Tool;

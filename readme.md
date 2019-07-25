@@ -10,7 +10,7 @@ This package makes it easy to create pages that are editable in Nova.
 
 You can install the package in to a Laravel app that uses Nova via composer:
 ```
-composer require ninjami/nova-simple-cms
+composer require joonas1234/nova-simple-cms
 ```
 
 ```
@@ -22,22 +22,22 @@ public function tools()
     return [
         // ...
 
-        new \Ninjami\NovaSimpleCms\NovaSimpleCms()
+        new \Joonas1234\NovaSimpleCms\NovaSimpleCms()
 }
 ``` 
 
 Publish migrations and migrate:
 ```
-php artisan vendor:publish --tag=migrations --provider=Ninjami\\NovaSimpleCms\\ToolServiceProvider
+php artisan vendor:publish --tag=migrations --provider=Joonas1234\\NovaSimpleCms\\ToolServiceProvider
 php artisan migrate
 ```
 
 Publish config:
 ```
-php artisan vendor:publish --tag=config --provider=Ninjami\\NovaSimpleCms\\ToolServiceProvider
+php artisan vendor:publish --tag=config --provider=Joonas1234\\NovaSimpleCms\\ToolServiceProvider
 ```
 
 Create blueprints folder and copy example blueprint:
 ```
-php artisan vendor:publish --tag=blueprints --provider=Ninjami\\NovaSimpleCms\\ToolServiceProvider
+php artisan vendor:publish --tag=blueprints --provider=Joonas1234\\NovaSimpleCms\\ToolServiceProvider
 ```

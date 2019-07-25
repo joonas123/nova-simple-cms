@@ -1,9 +1,9 @@
 <?php
 
-namespace Ninjami\NovaSimpleCms;
+namespace Joonas1234\NovaSimpleCms;
 
 use Illuminate\Http\Request;
-use Ninjami\NovaSimpleCms\DeleteFile;
+use Joonas1234\NovaSimpleCms\DeleteFile;
 
 class ExtraFields
 {

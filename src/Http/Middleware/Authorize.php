@@ -1,9 +1,9 @@
 <?php
 
-namespace Ninjami\NovaSimpleCms\Http\Middleware;
+namespace Joonas1234\NovaSimpleCms\Http\Middleware;
 
 use Laravel\Nova\Nova;
-use Ninjami\NovaSimpleCms\NovaSimpleCms;
+use Joonas1234\NovaSimpleCms\NovaSimpleCms;
 
 class Authorize
 {

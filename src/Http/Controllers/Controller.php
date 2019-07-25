@@ -1,6 +1,6 @@
 <?php
 
-namespace Ninjami\NovaSimpleCms\Http\Controllers;
+namespace Joonas1234\NovaSimpleCms\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

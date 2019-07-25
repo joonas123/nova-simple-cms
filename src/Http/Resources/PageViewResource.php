@@ -1,6 +1,6 @@
 <?php
 
-namespace Ninjami\NovaSimpleCms\Http\Resources;
+namespace Joonas1234\NovaSimpleCms\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

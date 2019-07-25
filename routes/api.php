@@ -18,13 +18,13 @@ use Illuminate\Support\Facades\Route;
 //     //
 // });
 
-Route::get('/blueprints', 'Ninjami\NovaSimpleCms\Http\Controllers\BlueprintController@index');
+Route::get('/blueprints', 'Joonas1234\NovaSimpleCms\Http\Controllers\BlueprintController@index');
 
-Route::post('/{resource}', 'Ninjami\NovaSimpleCms\Http\Controllers\CreateController@handle');
+Route::post('/{resource}', 'Joonas1234\NovaSimpleCms\Http\Controllers\CreateController@handle');
 
-Route::get('/{resource}/creation-fields', 'Ninjami\NovaSimpleCms\Http\Controllers\CreateController@formFields');
+Route::get('/{resource}/creation-fields', 'Joonas1234\NovaSimpleCms\Http\Controllers\CreateController@formFields');
 
-Route::get('/{resource}/{resourceId}/update-fields', 'Ninjami\NovaSimpleCms\Http\Controllers\UpdateController@formFields');
+Route::get('/{resource}/{resourceId}/update-fields', 'Joonas1234\NovaSimpleCms\Http\Controllers\UpdateController@formFields');
 
-Route::put('/{resource}/{resourceId}', 'Ninjami\NovaSimpleCms\Http\Controllers\UpdateController@handle');
+Route::put('/{resource}/{resourceId}', 'Joonas1234\NovaSimpleCms\Http\Controllers\UpdateController@handle');
 
