@@ -1,0 +1,32 @@
+{
+    "name": "ninjami/nova-simple-cms",
+    "description": "A Laravel Nova tool.",
+    "keywords": [
+        "laravel",
+        "nova",
+        "cms"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1.0",
+        "froala/nova-froala-field": "^3.0",
+        "outhebox/nova-hidden-field": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ninjami\\NovaSimpleCms\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ninjami\\NovaSimpleCms\\ToolServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
