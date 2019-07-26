@@ -14,6 +14,12 @@ use Laravel\Nova\Http\Requests\UpdateResourceRequest;
 class UpdateController extends Controller
 {
     
+    /**
+     * List the update fields for the given resource.
+     *
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @return \Illuminate\Http\Response
+     */
     public function formFields(NovaRequest $request)
     {
         $resource = $request->newResourceWith($request->findModelOrFail());
@@ -25,7 +31,7 @@ class UpdateController extends Controller
 
         $resource->authorizeToUpdate($request);
 
-        $fields = $resource->updateFieldsWithinPanels($request);
+        $fields = $resource->updateFields($request)->values()->all();
 
         $dynamicFields = ExtraFields::fieldNames($request->blueprint);
 
@@ -37,7 +43,6 @@ class UpdateController extends Controller
         
         return response()->json([
             'fields' => $fields,
-            'panels' => $request->newResource()->availablePanelsForUpdate($request),
             'blueprint' => $blueprint,
         ]);
     }
@@ -92,7 +97,7 @@ class UpdateController extends Controller
             collect($callbacks)->each->__invoke();
 
             return $model;
-            
+
         });
 
         return response()->json([

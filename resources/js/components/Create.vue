@@ -38,7 +38,7 @@
                     </div>
 
                     <!-- Create Button -->
-                    <div class="bg-30 flex items-center px-8 py-4">
+                    <div class="flex items-center px-8 py-4">
                         <a
                             @click="$router.back()"
                             class="btn btn-link dim cursor-pointer text-80 ml-auto mr-6"
@@ -129,9 +129,7 @@ export default {
             this.loadingFields = true
             this.fields = []
 
-            const { 
-                data: { panels, fields } 
-                } = await Nova.request().get(
+            const { data: fields } = await Nova.request().get(
                 `/nova-vendor/nova-simple-cms/${this.resourceName}/creation-fields`,
                 {
                     params: {

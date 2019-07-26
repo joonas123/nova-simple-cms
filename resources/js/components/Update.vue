@@ -1,32 +1,32 @@
 <template>
     <loading-view :loading="loading">
-        <form v-if="panels" @submit.prevent="updateResource" autocomplete="off">
-        
-                <!-- Validation Errors -->
-                <!-- <validation-errors :errors="validationErrors" /> -->
-            <div class="mb-6">
+        <heading class="mb-3">{{ __('Edit :resource', { resource: singularName }) }}</heading>
 
-                <heading class="mb-3">{{ __('Edit :resource', { resource: singularName }) }}</heading>
-            
-                <card v-for="panel in panelsWithFields" :key="panel.name">
+        <card class="overflow-hidden">
 
-                    <div class="flex border-b border-40">
-                        <div class="w-1/5 py-6 px-8">
-                            <label for="blueprint" class="inline-block text-80 pt-2 leading-tight">
-                                {{ __('Blueprint') }}
-                            </label>
-                        </div> 
-                        <div class="py-6 px-8 w-1/2">
-                            <select class="w-full form-control form-input form-input-bordered" v-model="blueprint" name="blueprint" @change="getFields()">
-                                <option v-for="(value, key) in blueprints" :key="key" :value="value" :selected="blueprint == value">{{ __(value) }}</option>
-                            </select>
-                            <!-- <div class="help-text help-text mt-2" v-if="blueprint && blueprints[blueprint].help">{{ blueprints[blueprint].help }}</div> -->
-                        </div>
+            <form @submit.prevent="updateResource" autocomplete="off">
+
+                <div class="flex border-b border-40">
+                    <div class="w-1/5 py-6 px-8">
+                        <label for="blueprint" class="inline-block text-80 pt-2 leading-tight">
+                            {{ __('Blueprint') }}
+                        </label>
+                    </div> 
+                    <div class="py-6 px-8 w-1/2">
+                        <select class="w-full form-control form-input form-input-bordered" v-model="blueprint" name="blueprint" @change="getFields()">
+                            <option v-for="(value, key) in blueprints" :key="key" :value="value" :selected="blueprint == value">{{ __(value) }}</option>
+                        </select>
+                        <!-- <div class="help-text help-text mt-2" v-if="blueprint && blueprints[blueprint].help">{{ blueprints[blueprint].help }}</div> -->
                     </div>
+                </div>
+
+                <loading-view :loading="fields && loadingFields">
+                    <!-- Validation Errors -->
+                    <validation-errors :errors="validationErrors" />
                     
                     <component
-                        :class="{ 'remove-bottom-border': index == panel.fields.length - 1 }"
-                        v-for="(field, index) in panel.fields"
+                        :class="{ 'remove-bottom-border': index == fields.length - 1 }"
+                        v-for="(field, index) in fields"
                         :key="index"
                         :is="`form-${field.component}`"
                         :errors="validationErrors"
@@ -39,32 +39,32 @@
                         @file-deleted="updateLastRetrievedAtTimestamp"
                     />
 
-                </card>
-            </div>
-            <!-- Update Button -->
-            <div class="flex items-center">
-                <cancel-button />
+                    <!-- Update Button -->
+                    <div class="flex items-center px-8 py-4">
+                        <cancel-button />
 
-                <progress-button
-                    class="mr-3"
-                    dusk="update-and-continue-editing-button"
-                    @click.native="updateAndContinueEditing"
-                    :disabled="isWorking"
-                    :processing="submittedViaUpdateAndContinueEditing"
-                >
-                    {{ __('Update & Continue Editing') }}
-                </progress-button>
+                        <progress-button
+                            class="mr-3"
+                            dusk="update-and-continue-editing-button"
+                            @click.native="updateAndContinueEditing"
+                            :disabled="isWorking"
+                            :processing="submittedViaUpdateAndContinueEditing"
+                        >
+                            {{ __('Update & Continue Editing') }}
+                        </progress-button>
 
-                <progress-button
-                    dusk="update-button"
-                    type="submit"
-                    :disabled="isWorking"
-                    :processing="submittedViaUpdateResource"
-                >
-                    {{ __('Update :resource', { resource: singularName }) }}
-                </progress-button>
-            </div>
-        </form>
+                        <progress-button
+                            dusk="update-button"
+                            type="submit"
+                            :disabled="isWorking"
+                            :processing="submittedViaUpdateResource"
+                        >
+                            {{ __('Update :resource', { resource: singularName }) }}
+                        </progress-button>
+                    </div>
+                </loading-view>
+            </form>
+        </card>
     </loading-view>
 </template>
 
@@ -96,10 +96,10 @@ export default {
     data: () => ({
         relationResponse: null,
         loading: true,
+        loadingFields: false,
         submittedViaUpdateAndContinueEditing: false,
         submittedViaUpdateResource: false,
         fields: [],
-        panels: [],
         validationErrors: new Errors(),
         lastRetrievedAt: null,
         blueprints: [],
@@ -114,6 +114,8 @@ export default {
         )
         this.blueprints = blueprints
         
+        this.loading = false
+        
         this.getFields()
         this.updateLastRetrievedAtTimestamp()
     },
@@ -126,13 +128,12 @@ export default {
 
             if(!this.blueprints) { return false }
 
-            this.loading = true
+            this.loadingFields = true
 
-            this.panels = []
             this.fields = []
-
+            console.log('täällä')
             const {
-                data: { panels, fields, blueprint },
+                data: { fields, blueprint },
                 } = await Nova.request()
                 .get(`/nova-vendor/nova-simple-cms/${this.resourceName}/${this.resourceId}/update-fields`, 
                 {
@@ -153,9 +154,8 @@ export default {
                 })
 
             this.blueprint = blueprint
-            this.panels = panels
             this.fields = fields
-            this.loading = false
+            this.loadingFields = false
         },
 
         /**
@@ -302,14 +302,6 @@ export default {
             return this.submittedViaUpdateResource || this.submittedViaUpdateAndContinueEditing
         },
 
-        panelsWithFields() {
-            return _.map(this.panels, panel => {
-                return {
-                    name: panel.name,
-                    fields: _.filter(this.fields, field => field.panel == panel.name),
-                }
-            })
-        },
     },
 }
 </script>

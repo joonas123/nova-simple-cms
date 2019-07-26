@@ -13,7 +13,7 @@ class CreateController extends Controller
 {
     
     /**
-     * Creation fields for the resource
+     * List the creation fields for the given resource.
      * 
      * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
      * @return \Illuminate\Http\Response
@@ -21,14 +21,13 @@ class CreateController extends Controller
     public function formFields(NovaRequest $request) 
     {
 
-        $resourceClass = $request->resource();
+        $resource = $request->resource();
         
-        $resourceClass::authorizeToCreate($request);
+        $resource::authorizeToCreate($request);
 
-        return response()->json([
-            'fields' => $request->newResource()->creationFieldsWithinPanels($request),
-            'panels' => $request->newResource()->availablePanelsForCreate($request),
-        ]);
+        return response()->json(
+            $request->newResource()->creationFields($request)->values()->all()
+        );
 
     }
 
