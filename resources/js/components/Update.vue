@@ -131,7 +131,6 @@ export default {
             this.loadingFields = true
 
             this.fields = []
-            console.log('täällä')
             const {
                 data: { fields, blueprint },
                 } = await Nova.request()
