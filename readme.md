@@ -47,7 +47,7 @@ Publish only config:
 php artisan vendor:publish --tag=config --provider=Joonas1234\\NovaSimpleCms\\ToolServiceProvider
 ```
 
-Publish only example blueprint and template
+Publish example template
 ```
 php artisan vendor:publish --tag=example --provider=Joonas1234\\NovaSimpleCms\\ToolServiceProvider
 ```

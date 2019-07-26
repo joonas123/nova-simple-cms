@@ -32,7 +32,6 @@ class ToolServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__.'/../config/blueprints/example.php' => config_path('blueprints/example.php'),
             __DIR__.'/../resources/views/templates/example.blade.php' => resource_path('views/vendor/nova-simple-cms/templates/example.blade.php'),
 
         ], 'example');

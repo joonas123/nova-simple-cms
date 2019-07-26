@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Actions\ActionEvent;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Http\Requests\CreateResourceRequest;
+use Joonas1234\NovaSimpleCms\ExtraFields;
 
 class CreateController extends Controller
 {
@@ -17,7 +18,8 @@ class CreateController extends Controller
      * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function formFields(NovaRequest $request) {
+    public function formFields(NovaRequest $request) 
+    {
 
         $resourceClass = $request->resource();
         
@@ -51,15 +53,16 @@ class CreateController extends Controller
             );
             
             // Get fields for this blueprint
-            $fields = array_keys(config('blueprints.' . $request->blueprint . '.fields'));
+            $fields = ExtraFields::fetch($request->blueprint);
 
             // Construct new array from dynamic fields
             $data = [];
             foreach($fields as $field) {
-                $data[$field] = $model->$field;
+                $attr = $field->attribute;
+                $data[$attr] = $model->$attr;
 
                 // remove dynamic fields from model so model can be saved
-                unset($model->$field);
+                unset($model->$attr);
             }
             // Assign data array to data column
             $model->data = $data; 

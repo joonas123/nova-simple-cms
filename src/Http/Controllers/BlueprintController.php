@@ -2,6 +2,8 @@
 
 namespace Joonas1234\NovaSimpleCms\Http\Controllers;
 
+use Joonas1234\NovaSimpleCms\Blueprint;
+
 class BlueprintController extends Controller
 {
     
@@ -10,9 +12,9 @@ class BlueprintController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        return response(config('blueprints'), 200);
+    public function index() 
+    {
+        return response(Blueprint::get(), 200);
     }
-
 
 }

@@ -14,6 +14,9 @@ class NovaSimpleCms extends Tool
      */
     public function boot()
     {
+        Nova::resources([
+            \Joonas1234\NovaSimpleCms\Page::class,
+        ]);
         Nova::script('nova-simple-cms', __DIR__.'/../dist/js/tool.js');
         Nova::style('nova-simple-cms', __DIR__.'/../dist/css/tool.css');
     }

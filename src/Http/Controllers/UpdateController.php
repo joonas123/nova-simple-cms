@@ -7,6 +7,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Actions\ActionEvent;
+use Joonas1234\NovaSimpleCms\ExtraFields;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Http\Requests\UpdateResourceRequest;
 
@@ -26,7 +27,7 @@ class UpdateController extends Controller
 
         $fields = $resource->updateFieldsWithinPanels($request);
 
-        $dynamicFields = array_keys(config('blueprints.' . $blueprint . '.fields'));
+        $dynamicFields = ExtraFields::fieldNames($request->blueprint);
 
         foreach($fields as $field) {
             if(in_array($field->attribute, $dynamicFields)) {
@@ -67,20 +68,19 @@ class UpdateController extends Controller
 
             [$model, $callbacks] = $resource::fillForUpdate($request, $model);
 
-            $fields = config('blueprints.' . $request->blueprint . '.fields');
+            $fields = ExtraFields::fetch($request->blueprint);
 
-            foreach($fields as $fieldName => $fieldSettings) {
-
+            foreach($fields as $field) {
+                $attr = $field->attribute;
                 // Don't touch if field is file and nothing is posted
-                if(in_array($fieldSettings['type'], ['File', 'Image'])) {
-
-                    $data[$fieldName] = $model->$fieldName ?? $data[$fieldName] ?? null;
+                if($field->component == 'file-field') {
+                    $data[$attr] = $model->$attr ?? $data[$attr] ?? null;
                 } else {
-                    $data[$fieldName] = $model->$fieldName;
+                    $data[$attr] = $model->$attr;
                 }  
 
                 // remove dynamic fields from model so model can be saved
-                unset($model->$fieldName);
+                unset($model->$attr);
             }
             // Assign data array to data column
             $model->data = $data; 
@@ -92,6 +92,7 @@ class UpdateController extends Controller
             collect($callbacks)->each->__invoke();
 
             return $model;
+            
         });
 
         return response()->json([

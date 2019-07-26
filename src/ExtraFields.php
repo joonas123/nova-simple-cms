@@ -20,25 +20,47 @@ class ExtraFields
 
         $blueprint = $request->blueprint ?? $resource->blueprint;
 
-        if($blueprint) {
+        $additionalFields = self::fetch($blueprint);
 
-            $additionalFields = config('blueprints.' . $blueprint . '.fields');
-            foreach($additionalFields as $name => $options) {
-               
-                $novaField = 'Laravel\Nova\Fields\\' . $options['type'];
-                $novaField = $novaField::make(__(ucfirst($name)), $name)->onlyOnForms();
-    
-                // Custom delete handling form File and Image -fields
-                if(in_array($options['type'], ['File', 'Image'])) {
-                    $novaField->delete(new DeleteFile);
-                } 
-    
-                $fields[] = $novaField;
-            }
+        foreach($additionalFields as $key => $field) {
+            
+            $field->onlyOnForms();
+
+            // Custom delete handling form file-fields
+            if($field->component == 'file-field') {
+                $field->delete(new DeleteFile);
+            } 
+
+            $fields[] = $field;
+        }
+
+        return $fields;
+
+    }
+
+    static function fetch($blueprint)
+    {
+
+        $blueprint = "\App\Nova\Blueprints\\$blueprint";
+
+        if(class_exists($blueprint)) {
+
+            $blueprint = new $blueprint;
+
+            return $blueprint->fields();
 
         }
-        
-        return $fields;
+
+        return [];
+
+    }
+
+    static function fieldNames($blueprint)
+    {
+
+        return array_map(function($field) {
+            return $field->attribute;
+        }, self::fetch($blueprint));
 
     }
 }

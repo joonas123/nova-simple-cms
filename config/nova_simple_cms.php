@@ -7,6 +7,7 @@ return [
     |--------------------------------------------------------------------------
     */
     'content_field_type' => 'froala',
-    'templates_folder' => 'templates'
-
+    'templates_folder' => 'templates',
+    'nav_label' => 'Pages',
+    'blueprint_folder' => 'Nova/Blueprints'
 ];
