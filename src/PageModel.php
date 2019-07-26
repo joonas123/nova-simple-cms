@@ -16,12 +16,22 @@ class PageModel extends Model
 
     protected $table = 'pages';
 
-	public function draft() {
+    public function draft() 
+    {
 		return $this->hasOne(PageModel::class, 'parent_id');
 	}
 
-	public function parent() {
+    public function parent() 
+    {
 		return $this->belongsTo(PageModel::class, 'parent_id');
-	}
+    }
+       
+    public function getViewDataAttribute() 
+    {
+        foreach($this->data as $key => $value) {
+            $this->$key = $value;
+        }
+        return $this;
+    }
 
 }
