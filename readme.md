@@ -4,16 +4,15 @@
 
 ## Description
 
-This package makes it easy to create pages that are editable in Nova.
+This package adds powerful but simple CMS to your Nova. You only need to add blueprint and template with same name and then you can start adding pages. Everything else is already handled! 
 
 ## Installation
 
-You can install the package in to a Laravel app that uses Nova via composer:
 ```
 composer require joonas1234/nova-simple-cms
 ```
 
-Add package to NovaServiceProvider:
+Then register the tool :
 ```
 // in app/Providers/NovaServiceProvder.php
 
@@ -26,28 +25,25 @@ public function tools()
         new \Joonas1234\NovaSimpleCms\NovaSimpleCms()
 }
 ``` 
+You can publish configuration file and migrations with command: `php artisan vendor:publish`
 
-Publish migrations, config and example
-```
-php artisan vendor:publish --provider=Joonas1234\\NovaSimpleCms\\ToolServiceProvider
-```
 
-Publish only migrations and migrate:
+To publish only migrations, run:
 ```
 php artisan vendor:publish --tag=migrations --provider=Joonas1234\\NovaSimpleCms\\ToolServiceProvider
 ```
 
-If you publish page migrations, remember to run:
+Then you have to run migrate to create `pages` -table
 ```
 php artisan migrate
 ```
 
-Publish only config:
+To publish only config:
 ```
 php artisan vendor:publish --tag=config --provider=Joonas1234\\NovaSimpleCms\\ToolServiceProvider
 ```
 
-Publish example template
+To publish only template example
 ```
 php artisan vendor:publish --tag=example --provider=Joonas1234\\NovaSimpleCms\\ToolServiceProvider
 ```
@@ -59,4 +55,4 @@ You have to publish and run Froala migrations to make it work:
 ```
 php artisan vendor:publish --tag=migrations --provider=Froala\\NovaFroalaField\\FroalaFieldServiceProvider 
 php artisan migrate
-```
+```
