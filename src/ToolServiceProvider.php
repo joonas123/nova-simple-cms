@@ -7,6 +7,9 @@ use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Joonas1234\NovaSimpleCms\Http\Middleware\Authorize;
+use Joonas1234\NovaSimpleCms\Commands\CreateBlueprint;
+use Joonas1234\NovaSimpleCms\Commands\CreateTemplate;
+use Joonas1234\NovaSimpleCms\Commands\CreatePage;
 
 class ToolServiceProvider extends ServiceProvider
 {
@@ -30,11 +33,6 @@ class ToolServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/nova_simple_cms.php' => config_path('nova/simple_cms.php'),
         ], 'config');
-
-        $this->publishes([
-            __DIR__.'/../resources/views/templates/example.blade.php' => resource_path('views/vendor/nova-simple-cms/templates/example.blade.php'),
-
-        ], 'example');
 
         if (! class_exists('CreatePagesTable')) {
             $timestamp = date('Y_m_d_His', time());
@@ -72,5 +70,14 @@ class ToolServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../config/nova_simple_cms.php', 'nova.simple_cms');
+
+        if (!$this->app->runningInConsole()) return;
+
+        $this->commands([
+            CreateBlueprint::class,
+            CreateTemplate::class,
+            CreatePage::class,
+        ]);
+
     }
 }
