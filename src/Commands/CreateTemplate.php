@@ -84,7 +84,7 @@ class CreateTemplate extends Command
     protected function getPath()
     {
         return $this->makeDirectory(
-            resource_path('views/vendor/nova-simple-cms/templates/' . $this->classname . '.blade.php')
+            resource_path(config('nova.simple_cms.templates_folder') . '/' . $this->classname . '.blade.php')
         );
     }
 

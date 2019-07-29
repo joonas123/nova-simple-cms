@@ -106,7 +106,7 @@ class CreateBlueprint extends Command
     protected function getPath()
     {
         return $this->makeDirectory(
-            app_path('Nova/Blueprints/' . $this->classname . '.php')
+            app_path(config('nova.simple_cms.blueprint_folder') . '/' . $this->classname . '.php')
         );
     }
 
