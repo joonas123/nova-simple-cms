@@ -18,7 +18,7 @@ class PublicPageController extends Controller
     {
         $page = PageModel::where('slug', $slug)->firstOrFail();
 
-        return view('nova-simple-cms::templates.' . Str::kebab($page->blueprint), [
+        return view(config('nova.simple_cms.templates_folder') . '.' . Str::kebab($page->blueprint), [
             'page' => $page->viewData
         ]);
     }
