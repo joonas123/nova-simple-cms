@@ -11,6 +11,20 @@ Nova.booting((Vue, router, store) => {
             },
         },
         {
+            name: 'nova-simple-cms-detail',
+            path: '/nova-simple-cms/:resourceName/:resourceId',
+            component: require('./components/Detail'),
+            props: route => {
+                return {
+                    resourceName: route.params.resourceName,
+                    resourceId: route.params.resourceId,
+                    viaResource: route.query.viaResource,
+                    viaResourceId: route.query.viaResourceId,
+                    viaRelationship: route.query.viaRelationship,
+                }
+            }
+        },
+        {
             name: 'nova-simple-cms-create',
             path: '/nova-simple-cms/:resourceName/create',
             component: require('./components/Create'),

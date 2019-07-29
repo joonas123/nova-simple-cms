@@ -169,7 +169,6 @@ export default {
 
                 this.$router.push({ path: redirect })
             } catch (error) {
-                console.log(error)
                 this.submittedViaCreateResource = false
 
                 if (error.response.status == 422) {

@@ -180,7 +180,6 @@ export default {
                 this.$router.push({ path: redirect })
             } catch (error) {
                 this.submittedViaUpdateResource = false
-                console.log(error)
                 if (error.response.status == 422) {
                     this.validationErrors = new Errors(error.response.data.errors)
                 }

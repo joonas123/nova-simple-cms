@@ -36,7 +36,7 @@
                     :dusk="`${resource['id'].value}-view-button`"
                     class="cursor-pointer text-70 hover:text-primary mr-3"
                     :to="{
-                        name: 'detail',
+                        name: 'nova-simple-cms-detail',
                         params: {
                             resourceName: resourceName,
                             resourceId: resource['id'].value,
