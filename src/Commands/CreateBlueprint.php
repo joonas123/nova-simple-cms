@@ -4,6 +4,7 @@ namespace Joonas1234\NovaSimpleCms\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 
 class CreateBlueprint extends Command
 {
@@ -19,7 +20,7 @@ class CreateBlueprint extends Command
      *
      * @var string
      */
-    protected $signature = 'Cms:blueprint {classname? : The blueprint\'s classname} {name? : The blueprint\'s identifier}';
+    protected $signature = 'Cms:blueprint {classname? : The blueprint\'s classname}';
 
     /**
      * The console command description.
@@ -34,13 +35,6 @@ class CreateBlueprint extends Command
      * @var string
      */
     protected $classname;
-
-    /**
-     * The layout's name attribute
-     *
-     * @var string
-     */
-    protected $name;
 
     /**
      * Create a new command instance.
@@ -61,7 +55,6 @@ class CreateBlueprint extends Command
     public function handle()
     {
         $this->classname = $this->getClassnameArgument();
-        $this->name = $this->getNameArgument();
 
         $path = $this->getPath();
 
@@ -82,20 +75,6 @@ class CreateBlueprint extends Command
         }
 
         return $this->argument('classname');
-    }
-
-    /**
-     * Get the name
-     *
-     * @return string
-     */
-    public function getNameArgument()
-    {
-        if(!$this->argument('name')) {
-            return strtolower($this->classname);
-        }
-
-        return $this->argument('name');
     }
 
     /**
@@ -139,7 +118,6 @@ class CreateBlueprint extends Command
                 ':name'
             ], [
                 $this->classname,
-                $this->name
             ],
             $this->files->get(__DIR__ . '/../Stubs/Blueprint.php')
         );

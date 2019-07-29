@@ -3,6 +3,7 @@
 namespace Joonas1234\NovaSimpleCms\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class CreatePage extends Command
 {
@@ -51,7 +52,7 @@ class CreatePage extends Command
             'classname' => $this->classname
         ]);
         $this->call('Cms:template', [
-            'classname' => $this->classname
+            'classname' => Str::kebab($this->classname)
         ]);
     }
 
