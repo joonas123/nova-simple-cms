@@ -13,7 +13,7 @@
                     </div> 
                     <div class="py-6 px-8 w-1/2">
                         <select class="w-full form-control form-input form-input-bordered" v-model="blueprint" name="blueprint" @change="getFields()">
-                            <option v-for="(value, key) in blueprints" :key="key" :value="value" :selected="blueprint == value">{{ __(value) }}</option>
+                            <option v-for="(value, key) in blueprints" :key="key" :value="key">{{ __(value) }}</option>
                         </select>
                         <!-- <div class="help-text help-text mt-2" v-if="blueprint && blueprints[blueprint].help">{{ blueprints[blueprint].help }}</div> -->
                     </div>
@@ -110,7 +110,7 @@ export default {
             `/nova-vendor/nova-simple-cms/blueprints`,
         )
         this.blueprints = blueprints
-        this.blueprint = blueprints[0]
+        this.blueprint = Object.keys(blueprints)[0]
 
         this.loading = false
 

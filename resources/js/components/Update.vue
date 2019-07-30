@@ -14,7 +14,7 @@
                     </div> 
                     <div class="py-6 px-8 w-1/2">
                         <select class="w-full form-control form-input form-input-bordered" v-model="blueprint" name="blueprint" @change="getFields()">
-                            <option v-for="(value, key) in blueprints" :key="key" :value="value" :selected="blueprint == value">{{ __(value) }}</option>
+                            <option v-for="(value, key) in blueprints" :key="key" :value="key">{{ __(value) }}</option>
                         </select>
                         <!-- <div class="help-text help-text mt-2" v-if="blueprint && blueprints[blueprint].help">{{ blueprints[blueprint].help }}</div> -->
                     </div>
@@ -109,9 +109,12 @@ export default {
     async created() {
         if (Nova.missingResource(this.resourceName)) return this.$router.push({ name: '404' })
 
-        const { data: blueprints } = await Nova.request(
-            `/nova-vendor/nova-simple-cms/blueprints`,
-        )
+        const { data: blueprints } = await Nova.request().get(`/nova-vendor/nova-simple-cms/blueprints`,
+        {
+            params: {
+                editing: true,
+            },
+        })
         this.blueprints = blueprints
         
         this.loading = false
