@@ -3,11 +3,13 @@ namespace Joonas1234\NovaSimpleCms;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class PageModel extends Model
 {
     
     use SoftDeletes;
+
     protected $dates = ['deleted_at'];
 
     protected $casts = [
@@ -34,4 +36,18 @@ class PageModel extends Model
         return $this;
     }
 
+    public function getBlueprintClassAttribute() 
+    {
+        $className = 'App/' . config('nova.simple_cms.blueprint_folder') . '/' . $this->blueprint;
+        return str_replace('/', '\\', $className);
+    }
+
+    public function getTemplateAttribute() 
+    {
+        $folder = $this->blueprintClass::templateFolder() ?? config('nova.simple_cms.templates_folder');
+        $file = $this->blueprintClass::templateName() ?? Str::kebab($this->blueprint);
+
+        return $folder . '.' . $file;
+    }
+    
 }

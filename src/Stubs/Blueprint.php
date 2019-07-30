@@ -2,7 +2,9 @@
 
 namespace App\Nova\Blueprints;
 
-class :classname {
+use Joonas1234\NovaSimpleCms\Blueprint;
+
+class :classname extends Blueprint {
 
     /**
      * Get the fields displayed by the resource.
