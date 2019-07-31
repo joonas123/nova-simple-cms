@@ -53,8 +53,10 @@ class Blueprint
      */
     public static function loadBlueprint($className) 
     {
-        $className = 'App/' . config('nova.simple_cms.blueprint_folder') . '/' . $className;
-        return new $className;
+        $className = str_replace('/', '\\', 'App/' . config('nova.simple_cms.blueprint_folder') . '/' . $className);
+        return class_exists($className) 
+            ? new $className 
+            : new self;
     }
 
     /**
