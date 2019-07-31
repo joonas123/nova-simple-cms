@@ -40,11 +40,29 @@ class Blueprint
     }
 
     /**
+     * Get the url prefix for the slug
+     *
+     * @return string
+     */
+    public static function slugPrefix() { }
+
+    /**
+     * Load specified blueprint class
+     *
+     * @return string
+     */
+    public static function loadBlueprint($className) 
+    {
+        $className = 'App/' . config('nova.simple_cms.blueprint_folder') . '/' . $className;
+        return new $className;
+    }
+
+    /**
      * Get available blueprint keys and labels for creation form
      *
      * @return array
      */
-    public static function creationFormValues() 
+    public static function creationFormBlueprints() 
     {   
         $classes = self::get();
 
@@ -67,7 +85,7 @@ class Blueprint
      *
      * @return array
      */
-    public static function updateFormValues() 
+    public static function updateFormBlueprints() 
     {   
         $classes = self::get();
 

@@ -18,6 +18,7 @@ class CreatePagesTable extends Migration
             $table->unsignedInteger('parent_id')->nullable();
             $table->boolean('is_visible')->default(true);
             $table->string('slug')->unique()->nullable();
+            $table->string('name')->nullable();
             $table->string('blueprint');
             $table->text('content');
             $table->json('data');

@@ -10,6 +10,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Froala\NovaFroalaField\Froala;
 use Outhebox\NovaHiddenField\HiddenField;
 use Joonas1234\NovaSimpleCms\ExtraFields;
+use Benjaminhirsch\NovaSlugField\Slug;
+use Benjaminhirsch\NovaSlugField\TextWithSlug;
 
 class Page extends BaseResource
 {
@@ -53,20 +55,26 @@ class Page extends BaseResource
     public function fields(Request $request)
     {
 
-        // Index fields
+        $selectedBlueprint = $request->blueprint ?? $this->blueprint;
+        $blueprint = Blueprint::loadBlueprint($selectedBlueprint);
+
         $fields = [
             ID::make()
                 ->sortable(),
-            Text::make(__('Slug'), 'slug')
-                ->sortable()
+            TextWithSlug::make(__('Name'), 'name')
+                ->slug('slug'),
+            Slug::make(__('Slug'), 'slug')
+                ->showUrlPreview(url('/'))
                 ->rules(['required', 'unique:pages,slug,{{resourceId}}'])
-                ->onlyOnForms(),
+                ->slugPrefix($blueprint->slugPrefix() ?? '')
+                ->onlyOnForms()
+                ->disableAutoUpdateWhenUpdating(),
             Text::make(__('Address'), function() {
                     return '<a target="_blank" href="'. url($this->slug) .'">' . url($this->slug) . '</a>';
                 })->ExceptOnForms()->asHtml(),
-            HiddenField::make(__('Blueprint'), 'blueprint'),
             Froala::make(__('Content'), 'content')
                 ->withFiles('public'),
+            HiddenField::make(__('Blueprint'), 'blueprint'),
             HiddenField::make(__('Data'), 'data')->onlyOnForms(),
             KeyValue::make(__('Data'), 'data')->onlyOnDetail()
                 

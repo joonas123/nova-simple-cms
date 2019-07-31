@@ -6,12 +6,41 @@
         "nova",
         "cms"
     ],
+    "authors": [
+        {
+            "name": "Joonas Kämäräinen",
+            "email": "joo.kamarainen@gmail.com"
+        }
+    ],
     "license": "MIT",
     "require": {
         "php": ">=7.1.0",
+        "laravel/nova": "*",
         "froala/nova-froala-field": "^3.0",
-        "outhebox/nova-hidden-field": "^1.0"
+        "outhebox/nova-hidden-field": "^1.0",
+        "benjaminhirsch/nova-slug-field": "master"
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "benjaminhirsch/nova-slug-field",
+                "version": "master",
+                "source": {
+                    "url": "https://github.com/joonas1234/nova-slug-field.git",
+                    "type": "git",
+                    "reference": "master"
+                },
+                "autoload": {
+                    "classmap": [""]
+                }
+            }
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Joonas1234\\NovaSimpleCms\\": "src/"

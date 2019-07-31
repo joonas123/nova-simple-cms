@@ -17,10 +17,10 @@ class BlueprintController extends Controller
     public function index(Request $request) 
     {
         if($request->editing) {
-            return response(Blueprint::updateFormValues(), 200);
+            return response(Blueprint::updateFormBlueprints(), 200);
         }
 
-        return response(Blueprint::creationFormValues(), 200);
+        return response(Blueprint::creationFormBlueprints(), 200);
     }
 
 }
