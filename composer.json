@@ -18,7 +18,7 @@
         "laravel/nova": "*",
         "froala/nova-froala-field": "^3.0",
         "outhebox/nova-hidden-field": "^1.0",
-        "benjaminhirsch/nova-slug-field": "master"
+        "benjaminhirsch/nova-slug-field": "dev-master"
     },
     "repositories": [
         {
@@ -29,11 +29,11 @@
             "type": "package",
             "package": {
                 "name": "benjaminhirsch/nova-slug-field",
-                "version": "master",
+                "version": "dev-master",
                 "source": {
                     "url": "https://github.com/joonas1234/nova-slug-field.git",
                     "type": "git",
-                    "reference": "master"
+                    "reference": "dev"
                 },
                 "autoload": {
                     "classmap": [""]
