@@ -18,27 +18,12 @@
         "laravel/nova": "*",
         "froala/nova-froala-field": "^3.0",
         "outhebox/nova-hidden-field": "^1.0",
-        "benjaminhirsch/nova-slug-field": "dev-master"
+        "joonas1234/nova-sluggable-field": "dev-master"
     },
     "repositories": [
         {
             "type": "composer",
             "url": "https://nova.laravel.com"
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "benjaminhirsch/nova-slug-field",
-                "version": "dev-master",
-                "source": {
-                    "url": "https://github.com/joonas1234/nova-slug-field.git",
-                    "type": "git",
-                    "reference": "dev"
-                },
-                "autoload": {
-                    "classmap": [""]
-                }
-            }
         }
     ],
     "autoload": {

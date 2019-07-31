@@ -10,8 +10,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Froala\NovaFroalaField\Froala;
 use Outhebox\NovaHiddenField\HiddenField;
 use Joonas1234\NovaSimpleCms\ExtraFields;
-use Benjaminhirsch\NovaSlugField\Slug;
-use Benjaminhirsch\NovaSlugField\TextWithSlug;
+use Joonas1234\NovaSluggableField\Slug;
+use Joonas1234\NovaSluggableField\TextWithSlug;
 
 class Page extends BaseResource
 {
