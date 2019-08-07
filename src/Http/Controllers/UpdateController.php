@@ -1,12 +1,12 @@
 <?php
 
 namespace Joonas1234\NovaSimpleCms\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Actions\ActionEvent;
+use Joonas1234\NovaSimpleCms\Blueprint;
 use Joonas1234\NovaSimpleCms\ExtraFields;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Http\Requests\UpdateResourceRequest;
@@ -40,10 +40,13 @@ class UpdateController extends Controller
                 $field->value = $resource->data[$field->attribute] ?? null;
             }
         }
+
+        $blueprintClass = Blueprint::loadBlueprint($blueprint);
         
         return response()->json([
             'fields' => $fields,
             'blueprint' => $blueprint,
+            'blueprintOptions' => $blueprintClass->formFieldOptions()
         ]);
     }
 

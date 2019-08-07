@@ -13,9 +13,10 @@
                         </label>
                     </div> 
                     <div class="py-6 px-8 w-1/2">
-                        <select class="w-full form-control form-input form-input-bordered" v-model="blueprint" name="blueprint" @change="getFields()">
+                        <select class="w-full form-control form-input form-input-bordered" v-if="!blueprintOptions.disabled" v-model="blueprint" name="blueprint" @change="getFields()">
                             <option v-for="(value, key) in blueprints" :key="key" :value="key">{{ __(value) }}</option>
                         </select>
+                        <input v-else class="w-full form-control form-input form-input-bordered" readonly name="blueprint" :value="blueprint">
                         <!-- <div class="help-text help-text mt-2" v-if="blueprint && blueprints[blueprint].help">{{ blueprints[blueprint].help }}</div> -->
                     </div>
                 </div>
@@ -103,7 +104,8 @@ export default {
         validationErrors: new Errors(),
         lastRetrievedAt: null,
         blueprints: [],
-        blueprint: ''
+        blueprint: '',
+        blueprintOptions: []
     }),
 
     async created() {
@@ -135,7 +137,7 @@ export default {
 
             this.fields = []
             const {
-                data: { fields, blueprint },
+                data: { fields, blueprint, blueprintOptions },
                 } = await Nova.request()
                 .get(`/nova-vendor/nova-simple-cms/${this.resourceName}/${this.resourceId}/update-fields`, 
                 {
@@ -157,6 +159,7 @@ export default {
 
             this.blueprint = blueprint
             this.fields = fields
+            this.blueprintOptions = blueprintOptions
             this.loadingFields = false
         },
 

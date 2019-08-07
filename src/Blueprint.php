@@ -16,6 +16,20 @@ class Blueprint
     public static $showInForm = true;
 
     /**
+     * If false, cannot change this blueprint to something else
+     *
+     * @var bool
+     */
+    public static $locked = false;
+
+    /**
+     * Help text for this blueprint
+     *
+     * @var bool
+     */
+    public static $helpText = NULL;
+
+    /**
      * Get the template folder of this blueprint
      *
      * @return string|null
@@ -98,7 +112,8 @@ class Blueprint
             $class = 'App/' . config('nova.simple_cms.blueprint_folder') . '/' . $className;
             $class = str_replace('/', '\\', $class);
 
-            $formValues[$className] = $class::label();
+            if($class::$showInForm)
+                $formValues[$className] = $class::label();
 
         }
         return $formValues;
@@ -122,6 +137,19 @@ class Blueprint
         }, $files);
 
         return $blueprints;
+    }
+
+    /**
+     * Get select blueprint form field options
+     *
+     * @return array
+     */
+    public function formFieldOptions() 
+    {
+        return [
+            'disabled' => $this::$locked,
+            'helpText' => $this::$helpText
+        ];
     }
 
 }
