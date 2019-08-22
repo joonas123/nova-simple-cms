@@ -48,6 +48,23 @@ To publish only template example
 php artisan vendor:publish --tag=example --provider=Joonas1234\\NovaSimpleCms\\ToolServiceProvider
 ```
 
+### Available configuration options
+CMS comes with default options that are following:
+```
+return [
+     // Default template location
+    'templates_folder' => 'vendor/nova-simple-cms/templates',
+    // Label that is shown in Nova's side navigation
+    'nav_label' => 'Pages', 
+     // Where blueprints are saved
+    'blueprint_folder' => 'Nova/Blueprints',
+    // Overrides Nova resource's label() function
+    'label' => 'Pages', 
+    // Overrides Nova resource's singularLabel() function
+    'singular_label' => 'Page', 
+];
+```
+
 ### Froala field
 This package currently uses Froala for content -field. https://github.com/froala/nova-froala-field
 
