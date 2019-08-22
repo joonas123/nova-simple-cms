@@ -22,6 +22,9 @@ class ToolServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'nova-simple-cms');
 
+        // Load Nova's translations
+        $this->loadJsonTranslationsFrom(resource_path('lang/vendor/nova'));
+
         $this->app->booted(function () {
             $this->routes();
         });
