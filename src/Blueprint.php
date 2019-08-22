@@ -16,6 +16,20 @@ class Blueprint
     public static $showInForm = true;
 
     /**
+     * Indicates if the is_visible field is shown in the form
+     *
+     * @var bool
+     */
+    public static $showIsVisibleField = true;
+
+    /**
+     * Indicates if the published_at field is shown in the form
+     *
+     * @var bool
+     */
+    public static $showPublishedAtField = true;
+
+    /**
      * If false, cannot change this blueprint to something else
      *
      * @var bool

@@ -5,6 +5,8 @@ namespace Joonas1234\NovaSimpleCms;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\KeyValue;
+use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\DateTime;
 use Illuminate\Http\Request;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Froala\NovaFroalaField\Froala;
@@ -79,6 +81,14 @@ class Page extends BaseResource
             KeyValue::make(__('Data'), 'data')->onlyOnDetail()
                 
         ];
+
+        if($blueprint::$showIsVisibleField) {
+            $fields[] = Boolean::make(__('Is visible'), 'is_visible');
+        }
+
+        if($blueprint::$showPublishedAtField) {
+            $fields[] = DateTime::make(__('Published at'), 'published_at');
+        }
 
         $fields = ExtraFields::merge($request, $fields, $this);
 

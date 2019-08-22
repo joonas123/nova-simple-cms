@@ -10,7 +10,7 @@ class PageModel extends Model
     
     use SoftDeletes;
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'published_at'];
 
     protected $casts = [
         'data' => 'json'
