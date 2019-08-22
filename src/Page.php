@@ -105,10 +105,12 @@ class Page extends BaseResource
 
         if($blueprint::$showIsVisibleField) {
             $fields[] = Boolean::make(__('Is visible'), 'is_visible');
+        } else {
+            $fields[] = Boolean::make(__('Is visible'), 'is_visible')->exceptOnForms();
         }
 
         if($blueprint::$showPublishedAtField) {
-            $fields[] = DateTime::make(__('Published at'), 'published_at');
+            $fields[] = DateTime::make(__('Published at'), 'published_at')->hideFromIndex();
         }
 
         $fields = ExtraFields::merge($request, $fields, $this);
