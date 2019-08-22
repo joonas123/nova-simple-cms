@@ -2,6 +2,7 @@
 
 namespace Joonas1234\NovaSimpleCms;
 
+use Illuminate\Support\Str;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\KeyValue;
@@ -47,6 +48,26 @@ class Page extends BaseResource
     public static $search = [
         'id', 'slug'
     ];
+
+    /**
+     * Get the displayable label of the resource.
+     *
+     * @return string
+     */
+    public static function label()
+    {
+        return config('nova.simple_cms.label') ?? Str::plural(Str::title(Str::snake(class_basename(get_called_class()), ' ')));
+    }
+
+    /**
+     * Get the displayable singular label of the resource.
+     *
+     * @return string
+     */
+    public static function singularLabel()
+    {
+        return config('nova.simple_cms.singular_label') ?? Str::singular(static::label());
+    }
 
      /**
      * Get the fields displayed by the resource.

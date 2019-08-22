@@ -47,7 +47,7 @@
                     <router-link
                         class="btn btn-default btn-primary"
                         :to="{ name: 'nova-simple-cms-create' }">
-                        {{ __('Create Page') }}
+                        {{ __('Create :resource', { resource: singularName }) }}
                     </router-link>
                 </div>
 
