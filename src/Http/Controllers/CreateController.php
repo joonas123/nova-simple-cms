@@ -57,6 +57,10 @@ class CreateController extends Controller
             // Construct new array from dynamic fields
             $data = [];
             foreach($fields as $field) {
+
+                // Don't save heading-field value
+                if($field->component == 'heading-field') continue;
+                
                 $attr = $field->attribute;
                 $data[$attr] = $model->$attr;
 

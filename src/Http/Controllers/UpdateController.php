@@ -79,6 +79,10 @@ class UpdateController extends Controller
             $fields = ExtraFields::fetch($request->blueprint);
 
             foreach($fields as $field) {
+
+                // Don't save heading-field value
+                if($field->component == 'heading-field') continue;
+                
                 $attr = $field->attribute;
                 // Don't touch if field is file and nothing is posted
                 if($field->component == 'file-field') {

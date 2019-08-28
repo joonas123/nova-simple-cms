@@ -40,27 +40,20 @@ class ExtraFields
 
     static function fetch($blueprint)
     {
-
         $blueprint = "\App\Nova\Blueprints\\$blueprint";
 
         if(class_exists($blueprint)) {
-
             $blueprint = new $blueprint;
-
             return $blueprint->fields();
-
         }
-
+        
         return [];
-
     }
 
     static function fieldNames($blueprint)
     {
-
         return array_map(function($field) {
             return $field->attribute;
         }, self::fetch($blueprint));
-
     }
 }
