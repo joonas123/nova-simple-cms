@@ -103,6 +103,11 @@ class Page extends BaseResource
                 
         ];
 
+        if($blueprint::$showMetaFields) {
+            $fields[] = Text::make(__('Meta title'), 'meta_title')->hideFromIndex();
+            $fields[] = Text::make(__('Meta description'), 'meta_description')->hideFromIndex();
+        }
+
         if($blueprint::$showIsVisibleField) {
             $fields[] = Boolean::make(__('Is visible'), 'is_visible');
         } else {

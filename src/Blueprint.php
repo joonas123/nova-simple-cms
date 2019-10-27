@@ -30,6 +30,13 @@ class Blueprint
     public static $showPublishedAtField = true;
 
     /**
+     * Indicates if the meta fieds (meta title and meta description) field is shown in the form
+     *
+     * @var bool
+     */
+    public static $showMetaFields = true;
+
+    /**
      * If false, cannot change this blueprint to something else
      *
      * @var bool
